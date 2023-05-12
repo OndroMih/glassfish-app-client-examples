@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ee.omnifish</groupId>
+    <artifactId>client</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <exec.mainClass>ee.omnifish.client.Client</exec.mainClass>
+        <gf.install>Path to GlassFish installation</gf.install>
+    </properties>
+    <name>GF appclient example</name>
+    <dependencies>
+        <!--        <dependency>
+            <groupId>org.glassfish.main.appclient</groupId>
+            <artifactId>gf-client</artifactId>
+            <version>5.1.0</version>
+        </dependency>-->
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>10.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>sampleclient</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                        <manifestEntries>
+                            <Main-Class>ee.omnifish.client.Main</Main-Class>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>prepare</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <configuration>
+                            <target>
+                                <java classname="org.glassfish.appclient.client.packageappclient.PackageAppClient"
+                                classpath="${gf.install}${file.separator}glassfish${file.separator}lib${file.separator}gf-client.jar"/>
+                                <unzip src="${gf.install}${file.separator}glassfish${file.separator}lib${file.separator}appclient.jar"
+                                dest="${project.build.directory}">
+                                </unzip>
+                            </target>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
