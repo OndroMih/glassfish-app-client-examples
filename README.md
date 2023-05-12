@@ -6,7 +6,7 @@ This example client applicaiton calls a simple remote EJB deployed on the GlassF
 
 ## Requirements
 
-This project requires Eclipse GlassFish Server 7 and Java 11 or newer.
+This project requires Eclipse GlassFish Server 7, Java 11 or newer, and Maven 3 (https://maven.apache.org/).
 
 If you want to use it with an older version of GlassFish server, you need to do the following changes:
 * In pom.xml file, change the version of the `jakarta.jakartaee-api` dependency from `10.0.0` to `8.0.0`
