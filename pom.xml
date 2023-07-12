@@ -60,8 +60,11 @@
                         <configuration>
                             <target>
                                 <java classname="org.glassfish.appclient.client.packageappclient.PackageAppClient"
-                                classpath="${gf.install}${file.separator}glassfish${file.separator}lib${file.separator}gf-client.jar"/>
-                                <unzip src="${gf.install}${file.separator}glassfish${file.separator}lib${file.separator}appclient.jar"
+                                classpath="${gf.install}${file.separator}glassfish${file.separator}lib${file.separator}gf-client.jar">
+                                    <arg value="-output"/>
+                                    <arg value="${project.build.directory}${file.separator}appclient.jar"/>
+                                </java>
+                                <unzip src="${project.build.directory}${file.separator}appclient.jar"
                                 dest="${project.build.directory}">
                                 </unzip>
                             </target>
