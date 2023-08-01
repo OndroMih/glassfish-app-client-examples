@@ -86,7 +86,7 @@ To specify it on the command line:
 target/appclient/glassfish/bin/appclient -client target/sampleclient.jar -targetserver glassfishserver.com
 ```
 
-We can also specify this in the configuration file `target/appclient/glassfish/config/asenv.bat` on Windows (or `asenv.conf` on Linux/Mac). There we need to change the value of `address` in the `target-server` element, such as:
+We can also specify this in the configuration file `target/appclient/glassfish/domains/domain1/config/glassfish-acc.xml`. There we need to change the value of `address` in the `target-server` element, such as:
 
 ```
 <target-server name="GlassFish server" address="glassfishserver.com" port="3700"/>
